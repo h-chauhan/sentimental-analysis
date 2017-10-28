@@ -6,10 +6,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import QuerySerializer
 
+from .nlp import pred
+
 # Create your views here.
 @api_view(['POST'])
-def get_is_harrassing(request):
-    return JsonResponse({"is_harrassing": True})
+def get_is_harassing(request):
+    return Response({"is_harassing": pred(request.data.get("statement"))})
 
 @api_view(['POST'])
 def add_query(request):
